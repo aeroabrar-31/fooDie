@@ -30,27 +30,24 @@ const Contact = () => {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(form.current);
-    if (captcha) {
-      // emailjs.send()
-      emailjs
-        .sendForm(
-          "service_ke1qcwd",
-          "template_i6jvcca",
-          form.current,
-          "6-tgNj4yOMmQVlcnE"
-        )
-        .then(
-          (result) => {
-            alert(result.text);
-            console.log("message sent");
-          },
-          (error) => {
-            alert(error.text);
-          }
-        );
-    } else {
-      alert("captcha didn't completed");
-    }
+
+    // emailjs.send()
+    emailjs
+      .sendForm(
+        "service_ke1qcwd",
+        "template_i6jvcca",
+        form.current,
+        "6-tgNj4yOMmQVlcnE"
+      )
+      .then(
+        (result) => {
+          alert(result.text);
+          console.log("message sent");
+        },
+        (error) => {
+          alert(error.text);
+        }
+      );
   }
 
   return (
@@ -135,11 +132,11 @@ const Contact = () => {
         >
           <CKEditor editor={ClassicEditor} data="" name="ckeditor_message" />
           <br></br>
-          <ReCAPTCHA
+          {/* <ReCAPTCHA
             style={{ textAlign: "center", margin: "auto", width: "50%" }}
             sitekey="6LeG2E0pAAAAAAcKXdARE9ukKau2VX3e-7CJy6Rk"
             onChange={onChange}
-          />
+          /> */}
         </div>
         <br></br>
         <Button type="submit" variant="contained">
