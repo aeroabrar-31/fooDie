@@ -4,9 +4,49 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setUrl } from "../utils/cartSlice";
+
 import * as Yup from "yup";
+import { useEffect, useState } from "react";
+import useRestroUrl from "../utils/useRestroUrl";
 
 const Login = () => {
+  const [url, tttt] = useState("");
+
+  const dispatch = useDispatch();
+
+  function got(data) {
+    console.log("got success");
+    console.log(data);
+    const temp =
+      "https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D" +
+      data.coords.latitude +
+      "%26lng%3D" +
+      data.coords.longitude +
+      "%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING";
+    console.log(data.coords.latitude + "  " + data.coords.longitude);
+
+    localStorage.setItem("restro_url", temp);
+    // getData();
+  }
+
+  function fail() {
+    console.log("fail");
+  }
+
+  async function getlocation() {
+    navigator.geolocation.getCurrentPosition(got, fail);
+  }
+
+  function get() {
+    getlocation();
+  }
+
+  useEffect(() => {
+    get();
+  }, []);
+
   let navigate = useNavigate();
 
   const defaultvalues = {
@@ -16,15 +56,16 @@ const Login = () => {
 
   const handleSubmit = (values) => {
     if (
-      values.email === "shaikabrarulhaq777@gmail.com" &&
-      values.password === "Abrar@31"
+      values.email === "test@gmail.com" &&
+      values.password === "password123"
     ) {
-      navigate("/");
+      navigate("/home");
     } else {
       alert("Invalid Credentials !!");
     }
     console.log("Form submitted");
     console.log(values);
+    localStorage.setItem("isLoggedin", true);
   };
 
   const validate = Yup.object().shape({
@@ -38,48 +79,52 @@ const Login = () => {
   });
 
   return (
-    <div className="form-container">
-      <h1>Login Form</h1>
+    <div className="form-div">
+      <div className="form-container">
+        <h1>Login Form</h1>
 
-      <Formik
-        initialValues={defaultvalues}
-        validationSchema={validate}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <Field
-            as={TextField}
-            label="Email"
-            name="email"
-            helperText={<ErrorMessage name="email" />}
-            FormHelperTextProps={{
-              sx: {
-                color: "red",
-              },
-            }}
-          ></Field>
-          <br />
-          <br />
-          <Field
-            as={TextField}
-            label="Password"
-            name="password"
-            type="password"
-            helperText={<ErrorMessage name="password" />}
-            FormHelperTextProps={{
-              sx: {
-                color: "red",
-              },
-            }}
-          ></Field>
-          <br />
-          <br />
+        <Formik
+          initialValues={defaultvalues}
+          validationSchema={validate}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Field
+              as={TextField}
+              label="Email"
+              name="email"
+              placeholder="test@gmail.com"
+              helperText={<ErrorMessage name="email" />}
+              FormHelperTextProps={{
+                sx: {
+                  color: "red",
+                },
+              }}
+            ></Field>
+            <br />
+            <br />
+            <Field
+              as={TextField}
+              label="Password"
+              name="password"
+              type="password"
+              placeholder="password123"
+              helperText={<ErrorMessage name="password" />}
+              FormHelperTextProps={{
+                sx: {
+                  color: "red",
+                },
+              }}
+            ></Field>
+            <br />
+            <br />
 
-          <Button variant="contained" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Formik>
+            <Button variant="contained" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };

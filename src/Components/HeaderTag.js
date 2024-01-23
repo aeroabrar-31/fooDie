@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
@@ -41,7 +41,18 @@ export const Title = () => {
 };
 
 export const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState("false");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedin") === true) {
+      console.log("setting loggednin");
+      setIsLoggedIn(true);
+    }
+
+    console.log(
+      isLoggedIn + "  isLoggedin " + localStorage.getItem("isLoggedin")
+    );
+  }, [isLoggedIn]);
 
   const cartItems = useSelector((store) => store.cart.items);
 
@@ -54,6 +65,12 @@ export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleLogout = () => {
+    navigate("/");
+    setIsLoggedIn(false);
+    localStorage.removeItem("isLoggedin");
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -82,7 +99,7 @@ export const Header = () => {
         </Typography>
 
         <Button color="inherit" sx={{ margin: 2 }}>
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
             Home
           </Link>
         </Button>
@@ -94,7 +111,10 @@ export const Header = () => {
         <Button color="inherit" sx={{ margin: 2 }}>
           <Link
             to="/contact"
-            style={{ textDecoration: "none", color: "white" }}
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
           >
             Contact
           </Link>
@@ -113,15 +133,18 @@ export const Header = () => {
           </Badge>
         </Link>
 
-        <IconButton onClick={handleMenu}>
-          <Avatar
-            src="https://assets.leetcode.com/users/avatars/avatar_1672670751.png"
-            sx={{ width: 45, height: 45, margin: 1 }}
-            aria-controls={openMenu ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={openMenu ? "true" : undefined}
-          ></Avatar>
-        </IconButton>
+        {
+          <IconButton onClick={handleMenu}>
+            <Avatar
+              src="https://assets.leetcode.com/users/avatars/avatar_1672670751.png"
+              sx={{ width: 40, height: 40, margin: 1 }}
+              aria-controls={openMenu ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={openMenu ? "true" : undefined}
+            ></Avatar>
+          </IconButton>
+        }
+
         <Menu
           id="basic-menu"
           open={openMenu}
@@ -137,7 +160,7 @@ export const Header = () => {
             <AccountCircleOutlined sx={{ marginRight: 1 }} />
             Profile
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleLogout}>
             <LogoutOutlined sx={{ marginRight: 1 }} />
             Logout
           </MenuItem>

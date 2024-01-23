@@ -1,4 +1,4 @@
-import { Alert, Button, ButtonGroup } from "@mui/material";
+import { Alert, Button, ButtonGroup, Tooltip } from "@mui/material";
 import { imgURL } from "../Config/constants";
 import { IMG_COMING_SOON } from "../Config/constants";
 import { useDispatch } from "react-redux";
@@ -68,12 +68,16 @@ const MenuCard = (props) => {
           <h2> {name}</h2>
           <h4>price - &#8377; {price / 100 - (price % 100)}</h4>
           <ButtonGroup variant="outlined">
-            <Button color="warning" onClick={handleRemove}>
-              <RemoveCircleOutline />
-            </Button>
-            <Button color="success" onClick={handleAdd(TransitionLeft)}>
-              <AddCircleOutlineIcon />
-            </Button>
+            <Tooltip title="remove from cart" placement="left">
+              <Button color="warning" onClick={handleRemove}>
+                <RemoveCircleOutline />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Add to cart" placement="right">
+              <Button color="success" onClick={handleAdd(TransitionLeft)}>
+                <AddCircleOutlineIcon />
+              </Button>
+            </Tooltip>
           </ButtonGroup>
         </span>
       </div>

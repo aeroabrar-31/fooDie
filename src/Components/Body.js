@@ -2,6 +2,8 @@ import { RestaurantCard } from "./RestaurantCard";
 import { restaurantsList } from "../Config/constants";
 import Shimmer from "./Shimmer";
 
+import { TextField } from "@mui/material";
+
 // import ;
 
 import { useEffect, useState } from "react";
@@ -9,38 +11,36 @@ import { useEffect, useState } from "react";
 import { filterData } from "../utils/helper";
 import { useRestaurantHook } from "../utils/useRestaurants";
 import Button from "@mui/material/Button";
+import useRestroUrl from "../utils/useRestroUrl";
+
+import { UseSelector, useSelector } from "react-redux";
 
 export const Body = () => {
   let [searchinp, setSearchinp] = useState("");
+  const restro_url = localStorage.getItem("restro_url");
 
   let [allrestaurants, setAllRestaurants] = useState([]);
 
   let [filterrestaurants, setFilterRestaurants] = useState([]);
 
-  // console.log(allrestaurants.length + "  " + filterrestaurants.length);
-
   async function getData() {
-    const data = await fetch(
-      "https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D15.8323892%26lng%3D78.0544946%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING"
-    );
+    console.log(restro_url);
+    const data = await fetch(restro_url);
     const jsondata = await data.json();
     console.log(jsondata);
     const restros =
       jsondata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
-    setAllRestaurants(restros);
-    setFilterRestaurants(restros);
 
-    // const restros = restaurantsList;
-    // setTimeout(() => {
-    //   console.log("set time out");
-    //   console.log(restros);
-
-    // }, 2000);
+    setTimeout(() => {
+      setAllRestaurants(restros);
+      setFilterRestaurants(restros);
+    }, 4000);
   }
 
   useEffect(() => {
     console.log("use Effect call back fxn");
+
     getData();
   }, []);
 
@@ -75,7 +75,11 @@ export const Body = () => {
         />
 
         {/* <h1>{searchClicked}</h1> */}
-        <Button variant="contained" color="secondary">
+        <Button
+          variant="contained"
+          sx={{ padding: "7px", borderRadius: "7px", textTransform: "none" }}
+          color="secondary"
+        >
           Search
         </Button>
       </div>
@@ -118,3 +122,9 @@ export const Body = () => {
 };
 
 // https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D15.8323892%26lng%3D78.0544946%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING
+// const restros = restaurantsList;
+// setTimeout(() => {
+//   console.log("set time out");
+//   console.log(restros);
+
+// }, 2000);

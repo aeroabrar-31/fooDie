@@ -18,8 +18,7 @@ export const RestaurantCard = ({
       </Link>
       <h3>{name}</h3>
       <h4>{cuisines.join(", ")}</h4>
-      <Rating value={avgRating} precision={0.1} readOnly></Rating> {avgRating}{" "}
-      rating
+      <h4>⭐ {avgRating} rating</h4>
     </div>
   );
 };

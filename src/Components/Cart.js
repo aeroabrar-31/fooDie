@@ -23,7 +23,7 @@ const Cart = () => {
 
   console.log(cartItems);
   return (
-    <div>
+    <div className="cart-div">
       <h1>Cart Items</h1> <h2>Total Amount = {total / 100}</h2>
       <Button variant="contained" color="warning" onClick={handleClearCart}>
         Clear Cart

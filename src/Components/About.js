@@ -3,7 +3,7 @@ import ProfileClass from "./ProfileClass";
 
 const About = () => {
   return (
-    <div>
+    <div className="about-div">
       <h1>About Us Page</h1>
       <h3>Welcome to Foodiezz</h3>
 

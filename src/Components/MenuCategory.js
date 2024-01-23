@@ -57,6 +57,7 @@ const MenuCategory = () => {
                 <Typography
                   align="center"
                   sx={{ width: "100%", fontSize: "25px" }}
+                  className="accord"
                 >
                   {keys[index]} ({arr.length})
                 </Typography>
