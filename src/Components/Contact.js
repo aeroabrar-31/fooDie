@@ -61,8 +61,8 @@ const Contact = () => {
           placeholder="ex: Abrar"
           required
           sx={{
-            margin: "15px",
-            width: "40%",
+            margin: "10px",
+            width: "60%",
           }}
         ></TextField>{" "}
         <br></br>
@@ -73,8 +73,8 @@ const Contact = () => {
           className="text-field"
           required
           sx={{
-            margin: "15px",
-            width: "40%",
+            margin: "10px",
+            width: "60%",
           }}
         ></TextField>
         <br></br>
@@ -85,8 +85,8 @@ const Contact = () => {
           className="text-field"
           required
           sx={{
-            margin: "15px",
-            width: "40%",
+            margin: "10px",
+            width: "60%",
           }}
         ></TextField>
         <br></br>
@@ -96,48 +96,13 @@ const Contact = () => {
           name="message"
           className="text-field"
           required
+          multiline
+          rows={5}
           sx={{
-            margin: "15px",
-            width: "40%",
+            margin: "10px",
+            width: "60%",
           }}
         ></TextField>
-        <div
-          style={{
-            width: "70%",
-            margin: "auto",
-            textAlign: "center",
-          }}
-        >
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
-              <DatePicker
-                sx={{
-                  margin: "auto",
-                  width: "55%",
-                  textAlign: "center",
-                  justifyContent: "center",
-                }}
-                label="Basic date picker"
-                name="dob"
-              />
-            </DemoContainer>
-          </LocalizationProvider>
-        </div>
-        <br></br>
-        <div
-          style={{
-            width: "70%",
-            margin: "auto",
-          }}
-        >
-          <CKEditor editor={ClassicEditor} data="" name="ckeditor_message" />
-          <br></br>
-          {/* <ReCAPTCHA
-            style={{ textAlign: "center", margin: "auto", width: "50%" }}
-            sitekey="6LeG2E0pAAAAAAcKXdARE9ukKau2VX3e-7CJy6Rk"
-            onChange={onChange}
-          /> */}
-        </div>
         <br></br>
         <Button type="submit" variant="contained">
           Send
@@ -149,3 +114,37 @@ const Contact = () => {
   );
 };
 export default Contact;
+
+{
+  /* <LocalizationProvider dateAdapter={AdapterDayjs}>
+  <DemoContainer components={["DatePicker"]}>
+    <DatePicker
+      sx={{
+        margin: "auto",
+        width: "55%",
+        textAlign: "center",
+        justifyContent: "center",
+      }}
+      label="Basic date picker"
+      name="dob"
+    />
+  </DemoContainer>
+</LocalizationProvider>; */
+}
+
+{
+  /* <div
+  style={{
+    width: "70%",
+    margin: "auto",
+  }}
+>
+  <CKEditor editor={ClassicEditor} data="" name="ckeditor_message" />
+  <br></br>
+  <ReCAPTCHA
+            style={{ textAlign: "center", margin: "auto", width: "50%" }}
+            sitekey="6LeG2E0pAAAAAAcKXdARE9ukKau2VX3e-7CJy6Rk"
+            onChange={onChange}
+          />
+</div>; */
+}

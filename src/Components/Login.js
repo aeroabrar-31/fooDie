@@ -1,7 +1,12 @@
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +15,7 @@ import { setUrl } from "../utils/cartSlice";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import useRestroUrl from "../utils/useRestroUrl";
+import { Visibility } from "@mui/icons-material";
 
 const Login = () => {
   const [url, tttt] = useState("");
@@ -71,7 +77,7 @@ const Login = () => {
   const validate = Yup.object().shape({
     email: Yup.string("Email..........")
       .email("Invalid email")
-      .required("Email can;t be empty bro"),
+      .required("Email can't be empty bro"),
 
     password: Yup.string()
       .min(8, "Min length - 8")
@@ -109,6 +115,13 @@ const Login = () => {
               name="password"
               type="password"
               placeholder="password123"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton>
+                    <Visibility></Visibility>
+                  </IconButton>
+                </InputAdornment>
+              }
               helperText={<ErrorMessage name="password" />}
               FormHelperTextProps={{
                 sx: {

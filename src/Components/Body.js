@@ -51,7 +51,7 @@ export const Body = () => {
   if (!allrestaurants)
     return (
       <div className="middle">
-        <h1>No Restaurants Found !</h1>
+        <h1>Sorry, No Restaurant is providing Online Delivery !!</h1>
       </div>
     );
 
@@ -62,7 +62,7 @@ export const Body = () => {
       <div className="search-div">
         <input
           type="text"
-          placeholder=""
+          placeholder="Restaurants, food"
           value={searchinp}
           onChange={(e) => {
             // console.log(e.target.value);

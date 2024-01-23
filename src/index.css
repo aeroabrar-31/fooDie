@@ -99,6 +99,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: rgba(237, 108, 2, 255);
   /* border: 2px solid wheat; */
 }
 
@@ -189,7 +190,7 @@ body {
 
 .contact-form {
   border: 2px solid green;
-  width: 50%;
+  width: 35%;
   margin: auto;
   text-align: center;
   justify-content: center;
