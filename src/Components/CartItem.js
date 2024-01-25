@@ -1,3 +1,4 @@
+import { Card } from "@mui/material";
 import { Alert, Button, ButtonGroup, Tooltip } from "@mui/material";
 import { imgURL } from "../Config/constants";
 import { IMG_COMING_SOON } from "../Config/constants";
@@ -16,9 +17,8 @@ import Slide from "@mui/material/Slide";
 function TransitionLeft(props) {
   return <Slide {...props} direction="left" />;
 }
-const MenuCard = (props) => {
-  // console.log(props);
 
+const CartItem = (props) => {
   let menuItem = { ...props.props };
   menuItem.quantity = 0;
 
@@ -65,7 +65,7 @@ const MenuCard = (props) => {
 
   return (
     <div className="">
-      <div className="menu-card">
+      <div className="cart-item">
         <img src={imageId}></img>
         <span>
           <h2> {name}</h2>
@@ -107,4 +107,4 @@ const MenuCard = (props) => {
   );
 };
 
-export default MenuCard;
+export default CartItem;

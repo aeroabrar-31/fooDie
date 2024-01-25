@@ -14,6 +14,7 @@ import {
 import RestaurantDetails from "./RestaurantDetails";
 import { useRestaurantDetail } from "../utils/useRestaurantDetail";
 import { ExpandCircleDown } from "@mui/icons-material";
+import { MenuPageShimmer } from "./MenuPageShimmer";
 
 const MenuCategory = () => {
   const [expanded, setExpanded] = useState(false);
@@ -31,7 +32,7 @@ const MenuCategory = () => {
   // console.log(restro_detail);
   // console.log("====================================");
 
-  if (item.size === 0) return <h1>Loading...</h1>;
+  if (item.size === 0) return <MenuPageShimmer />;
 
   let keys = [];
   let values = [];

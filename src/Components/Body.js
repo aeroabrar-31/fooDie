@@ -18,9 +18,13 @@ import Carouselcomp from "./Carouselcomp";
 
 export const Body = () => {
   let [searchinp, setSearchinp] = useState("");
+  let bdcApi = "https://api.bigdatacloud.net/data/reverse-geocode-client";
+  const Http = new XMLHttpRequest();
   const restro_url = localStorage.getItem("restro_url");
 
   let [allrestaurants, setAllRestaurants] = useState([]);
+
+  let [city, setCity] = useState("kkkk");
 
   let [filterrestaurants, setFilterRestaurants] = useState([]);
 
@@ -47,9 +51,42 @@ export const Body = () => {
     }, 4000);
   }
 
+  function getApi(bdcApi) {
+    Http.open("GET", bdcApi);
+    Http.send();
+    Http.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        let tt = JSON.parse(this.responseText);
+        console.log(tt);
+        setCity(tt.city);
+        // console.log(this.responseText);
+      }
+    };
+  }
+
   useEffect(() => {
     console.log("use Effect call back fxn");
-
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+        bdcApi =
+          bdcApi +
+          "?latitude=" +
+          localStorage.getItem("lat") +
+          "&longitude=" +
+          localStorage.getItem("long") +
+          "&localityLanguage=en";
+        getApi(bdcApi);
+      },
+      (err) => {
+        getApi(bdcApi);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
     getData();
   }, []);
 
@@ -72,7 +109,7 @@ export const Body = () => {
       <Carouselcomp props={carouselData} />
       <div className="middle">
         <Divider></Divider>
-        <h2>Restaurants with online food delivery</h2>
+        <h2>Restaurants with online food delivery in {city}</h2>
         <div className="search-div">
           <input
             type="text"

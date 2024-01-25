@@ -34,6 +34,8 @@ const Login = () => {
     console.log(data.coords.latitude + "  " + data.coords.longitude);
 
     localStorage.setItem("restro_url", temp);
+    localStorage.setItem("lat", data.coords.latitude);
+    localStorage.setItem("long", data.coords.longitude);
     // getData();
   }
 

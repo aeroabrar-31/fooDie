@@ -45,17 +45,15 @@ code {
   border: 3px solid orange;
   box-shadow: 2px 3px orange;
   border-radius: 6px;
-  width: 225px;
-  margin: 10px;
+  width: 250px;
+  margin: 20px;
   padding: 10px;
   -webkit-transform: scale(1);
   transform: scale(1);
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.card h4 {
-  /* padding: -2px; */
-}
+
 .card img {
   width: 100%;
   height: 175px;
@@ -83,7 +81,7 @@ body {
   min-height: 600px;
 }
 .body-middle h2 {
-  margin-left: 7%;
+  margin-left: 10%;
 }
 
 .footer {
@@ -128,8 +126,7 @@ body {
 }
 
 .shimmer-input {
-  margin-top: 10px;
-  margin: auto;
+  margin: 30px auto;
   width: 25%;
 }
 .shimmer-carousel {
@@ -137,7 +134,7 @@ body {
 
   justify-content: center;
   text-align: center;
-  margin: 30px auto;
+  margin: 50px auto;
   width: 100%;
   display: flex;
 }
@@ -229,6 +226,7 @@ body {
 .accordions-div {
   /* margin: 20px; */
   border: 2px solid firebrick;
+  min-height: 600px;
 }
 
 .accordions {
@@ -334,9 +332,49 @@ ul {
 }
 
 .cart-div {
-  min-height: 600px;
+  min-height: 100px;
 }
 
 .about-div {
   min-height: 600px;
+}
+
+.menu-page-shimmer-div {
+  min-height: 500px;
+  justify-content: center;
+  text-align: center;
+}
+
+.menu-page-shimmer-skeletons {
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.cart-item {
+  border: 3px solid rgba(237, 108, 2, 255);
+  width: 30%;
+  margin: 10px;
+  padding: 10px;
+}
+
+.cart-item img {
+  height: 140px;
+  width: 25%;
+  float: right;
+}
+.cart-page {
+  /* display: flex; */
+  /* width: 100%; */
+}
+.checkout {
+  padding: 13px;
+  /* color: blueviolet; */
+  text-align: center;
+  width: fit-content;
+}
+
+.amount {
+  color: rgba(237, 108, 2, 255);
 }

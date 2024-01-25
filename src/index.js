@@ -23,6 +23,7 @@ import { Provider } from "react-redux";
 import store from "./utils/reduxstore";
 import Cart from "./Components/Cart";
 import GoToTop from "./Components/GoToTop";
+import Kommunicate from "@kommunicate/kommunicate-chatbot-plugin";
 // import Instamart from "./src/Components/Instamart";
 
 const Instamart = lazy(() => import("./Components/Instamart"));
@@ -49,6 +50,11 @@ const Instamart = lazy(() => import("./Components/Instamart"));
  *    -CopyRights
  *
  */
+
+Kommunicate.init("751d78371567369de15bdd41b9f787c6", {
+  automaticChatOpenOnNavigation: true,
+  popupWidget: true,
+});
 
 const AppLayout = () => {
   return (

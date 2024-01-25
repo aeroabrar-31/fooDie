@@ -1,5 +1,5 @@
 import { LocationCityRounded, LocationOnTwoTone } from "@mui/icons-material";
-import { Card, CardContent, Divider } from "@mui/material";
+import { Card, CardContent, Divider, Typography } from "@mui/material";
 
 const RestaurantDetails = ({
   name,
@@ -20,7 +20,7 @@ const RestaurantDetails = ({
             <h1> {name}</h1>
 
             <h4>
-              <LocationOnTwoTone /> {locality}, {sla?.lastMileTravelString}
+              📍 {locality}, {sla?.lastMileTravelString}
             </h4>
             <h4>🔖 {aggregatedDiscountInfo?.descriptionList[0]?.meta}</h4>
           </span>
@@ -29,9 +29,10 @@ const RestaurantDetails = ({
         <div className="block2">
           <Card>
             <CardContent>
-              <h3>⭐ {avgRating} </h3>
+              {/* <h3>⭐ {avgRating} </h3> */}
+              <Typography variant="h5">⭐ {avgRating}</Typography>
               <Divider></Divider>
-              <h3>🚚 {sla?.deliveryTime} mins</h3>
+              <h3>🛵 {sla?.deliveryTime} mins</h3>
             </CardContent>
           </Card>
         </div>

@@ -57,7 +57,7 @@ const Wrapper = styled.section`
     color: white;
     font-size: 3.4rem;
     bottom: 2rem;
-    right: 3rem;
+    left: 30px;
     z-index: 999;
     display: flex;
     justify-content: center;

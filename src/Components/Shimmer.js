@@ -33,16 +33,14 @@ const Shimmer = () => {
         />
       </div>
       <div className="restro-cards">
-        {console.log(arr1)}
         {arr1.map((ele, index) => {
-          console.log(ele);
           return (
             <Skeleton
               key={index}
               variant="rounded"
-              width={240}
+              width={250}
               height={350}
-              sx={{ margin: "15px", padding: "10px" }}
+              sx={{ margin: "20px", padding: "10px" }}
             ></Skeleton>
           );
         })}
