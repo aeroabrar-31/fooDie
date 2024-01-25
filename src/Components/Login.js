@@ -115,13 +115,6 @@ const Login = () => {
               name="password"
               type="password"
               placeholder="password123"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton>
-                    <Visibility></Visibility>
-                  </IconButton>
-                </InputAdornment>
-              }
               helperText={<ErrorMessage name="password" />}
               FormHelperTextProps={{
                 sx: {

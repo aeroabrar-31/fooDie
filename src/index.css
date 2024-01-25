@@ -82,6 +82,9 @@ body {
 .middle {
   min-height: 600px;
 }
+.body-middle h2 {
+  margin-left: 7%;
+}
 
 .footer {
   margin: 0px;
@@ -128,6 +131,15 @@ body {
   margin-top: 10px;
   margin: auto;
   width: 25%;
+}
+.shimmer-carousel {
+  /* border: 2px solid green; */
+
+  justify-content: center;
+  text-align: center;
+  margin: 30px auto;
+  width: 100%;
+  display: flex;
 }
 .shimmer {
   margin-top: 10px;
@@ -186,6 +198,18 @@ body {
   height: 160px;
   width: 25%;
   float: right;
+}
+
+.carousel {
+  width: 80%;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.carousel img {
+  height: 90%;
+  width: 90%;
 }
 
 .contact-form {

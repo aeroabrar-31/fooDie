@@ -2,7 +2,7 @@ import { RestaurantCard } from "./RestaurantCard";
 import { restaurantsList } from "../Config/constants";
 import Shimmer from "./Shimmer";
 
-import { TextField } from "@mui/material";
+import { Divider, TextField } from "@mui/material";
 
 // import ;
 
@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import useRestroUrl from "../utils/useRestroUrl";
 
 import { UseSelector, useSelector } from "react-redux";
+import Carouselcomp from "./Carouselcomp";
 
 export const Body = () => {
   let [searchinp, setSearchinp] = useState("");
@@ -22,6 +23,8 @@ export const Body = () => {
   let [allrestaurants, setAllRestaurants] = useState([]);
 
   let [filterrestaurants, setFilterRestaurants] = useState([]);
+
+  let [carouselData, setCarouselData] = useState([]);
 
   async function getData() {
     console.log(restro_url);
@@ -32,9 +35,15 @@ export const Body = () => {
       jsondata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
 
+    const crsData =
+      jsondata?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info;
+
+    console.log(crsData);
+
     setTimeout(() => {
       setAllRestaurants(restros);
       setFilterRestaurants(restros);
+      setCarouselData(crsData);
     }, 4000);
   }
 
@@ -58,34 +67,39 @@ export const Body = () => {
   return allrestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="middle">
-      <div className="search-div">
-        <input
-          type="text"
-          placeholder="Restaurants, food"
-          value={searchinp}
-          onChange={(e) => {
-            // console.log(e.target.value);
-            setSearchinp(e.target.value);
-            console.log("Clicked - " + e.target.value);
-            const data = filterData(e.target.value, allrestaurants);
-            console.log(data.length);
-            setFilterRestaurants(data);
-          }}
-        />
+    <div className="body-middle">
+      <h2>So, what you want to eat today?</h2>
+      <Carouselcomp props={carouselData} />
+      <div className="middle">
+        <Divider></Divider>
+        <h2>Restaurants with online food delivery</h2>
+        <div className="search-div">
+          <input
+            type="text"
+            placeholder="Restaurants, food"
+            value={searchinp}
+            onChange={(e) => {
+              // console.log(e.target.value);
+              setSearchinp(e.target.value);
+              console.log("Clicked - " + e.target.value);
+              const data = filterData(e.target.value, allrestaurants);
+              console.log(data.length);
+              setFilterRestaurants(data);
+            }}
+          />
 
-        {/* <h1>{searchClicked}</h1> */}
-        <Button
-          variant="contained"
-          sx={{ padding: "7px", borderRadius: "7px", textTransform: "none" }}
-          color="secondary"
-        >
-          Search
-        </Button>
-      </div>
+          {/* <h1>{searchClicked}</h1> */}
+          <Button
+            variant="contained"
+            sx={{ padding: "7px", borderRadius: "7px", textTransform: "none" }}
+            color="secondary"
+          >
+            Search
+          </Button>
+        </div>
 
-      <div className="restro-cards">
-        {/* <RestaurantCard
+        <div className="restro-cards">
+          {/* <RestaurantCard
           name={restaurantsList[0].info.name}
           cloudinaryImageId={restaurantsList[0].info.cloudinaryImageId}
           cuisines={restaurantsList[0].info.cuisines}
@@ -101,21 +115,22 @@ export const Body = () => {
           {...restaurantsList[2].info}
           key={restaurantsList[2].info.id}
         /> */}
-        {
-          // no key <<<< index key <<<<<<< unique key
-        }
+          {
+            // no key <<<< index key <<<<<<< unique key
+          }
 
-        {filterrestaurants.length === 0 ? (
-          <h1>Oops! Can't find restaurant</h1>
-        ) : (
-          filterrestaurants.map((rest) => {
-            return <RestaurantCard {...rest.info} key={rest.info.id} />;
-          })
-        )}
-        {/* <RestaurantCard restaurant={restaurantsList[0].info} />  props
+          {filterrestaurants.length === 0 ? (
+            <h1>Oops! Can't find restaurant</h1>
+          ) : (
+            filterrestaurants.map((rest) => {
+              return <RestaurantCard {...rest.info} key={rest.info.id} />;
+            })
+          )}
+          {/* <RestaurantCard restaurant={restaurantsList[0].info} />  props
       <RestaurantCard restaurant={restaurantsList[1].info} />
       <RestaurantCard restaurant={restaurantsList[2].info} />
       <RestaurantCard restaurant={restaurantsList[3].info} /> */}
+        </div>
       </div>
     </div>
   );
