@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Card, Paper } from "@mui/material";
 import { Alert, Button, ButtonGroup, Tooltip } from "@mui/material";
 import { imgURL } from "../Config/constants";
 import { IMG_COMING_SOON } from "../Config/constants";
@@ -66,25 +66,27 @@ const CartItem = (props) => {
   return (
     <div className="">
       <div className="cart-item">
-        <img src={imageId}></img>
-        <span>
-          <h2> {name}</h2>
-          <h4>price - &#8377; {price / 100 - (price % 100)}</h4>
-          <ButtonGroup variant="outlined">
-            <Tooltip title="remove from cart" placement="left">
-              <Button color="warning" onClick={handleRemove}>
-                <RemoveCircleOutline />
-              </Button>
-            </Tooltip>
-            {/* <h4>{quantity}</h4> */}
-            <Button>{quantity}</Button>
-            <Tooltip title="Add to cart" placement="right">
-              <Button color="success" onClick={handleAdd(TransitionLeft)}>
-                <AddCircleOutlineIcon />
-              </Button>
-            </Tooltip>
-          </ButtonGroup>
-        </span>
+        <Paper elevation={4} sx={{ padding: "10px" }}>
+          <img src={imageId}></img>
+          <span>
+            <h2> {name}</h2>
+            <h4>price - &#8377; {price / 100 - (price % 100)}</h4>
+            <ButtonGroup variant="outlined">
+              <Tooltip title="remove from cart" placement="left">
+                <Button color="warning" onClick={handleRemove}>
+                  <RemoveCircleOutline />
+                </Button>
+              </Tooltip>
+              {/* <h4>{quantity}</h4> */}
+              <Button>{quantity}</Button>
+              <Tooltip title="Add to cart" placement="right">
+                <Button color="success" onClick={handleAdd(TransitionLeft)}>
+                  <AddCircleOutlineIcon />
+                </Button>
+              </Tooltip>
+            </ButtonGroup>
+          </span>
+        </Paper>
       </div>
       <Snackbar
         open={openAdd === "true"}

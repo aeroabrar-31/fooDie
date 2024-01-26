@@ -11,7 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-@tailwind base;
+*/
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
 
@@ -78,8 +79,13 @@ body {
 }
 
 .middle {
-  min-height: 600px;
+  min-height: 500px;
 }
+.middle img {
+  height: 800px;
+  width: 100%;
+}
+
 .body-middle h2 {
   margin-left: 10%;
 }
@@ -271,6 +277,7 @@ body {
    */
 
   display: flex;
+  padding: 0px 5px;
   /* text-align: center; */
 }
 
@@ -333,16 +340,31 @@ ul {
 
 .cart-div {
   min-height: 100px;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
 }
 
 .about-div {
   min-height: 600px;
 }
 
+.empty-cart {
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+}
+.orange-text {
+  color: rgba(237, 108, 2, 255);
+}
+
 .menu-page-shimmer-div {
   min-height: 500px;
   justify-content: center;
   text-align: center;
+}
+.cart-div h1 {
+  color: rgba(237, 108, 2, 255);
 }
 
 .menu-page-shimmer-skeletons {
@@ -353,15 +375,26 @@ ul {
 }
 
 .cart-item {
-  border: 3px solid rgba(237, 108, 2, 255);
-  width: 30%;
-  margin: 10px;
+  /* border: 3px solid rgba(237, 108, 2, 255); */
+
+  width: 45%;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+
   padding: 10px;
 }
 
+.cart-address-div {
+  width: fit-content;
+  padding: 20px;
+  border: 2px solid black;
+}
+
 .cart-item img {
-  height: 140px;
-  width: 25%;
+  height: fit-content;
+  border-radius: 5px;
+  width: 35%;
   float: right;
 }
 .cart-page {
@@ -369,7 +402,7 @@ ul {
   /* width: 100%; */
 }
 .checkout {
-  padding: 13px;
+  padding: 7px 20px;
   /* color: blueviolet; */
   text-align: center;
   width: fit-content;
