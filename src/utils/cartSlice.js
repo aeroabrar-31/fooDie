@@ -5,6 +5,7 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     restaurants_url: "abrar",
+    login: false,
   },
 
   reducers: {
@@ -14,6 +15,14 @@ const cartSlice = createSlice({
     },
     addItem: (state, actions) => {
       state.items.push(actions.payload);
+    },
+
+    setLoggedinTrue: (state, actions) => {
+      state.login = actions.payload;
+    },
+
+    setLoggedinFalse: (state, actions) => {
+      state.login = actions.payload;
     },
 
     clearCart: (state, actions) => {
@@ -28,4 +37,11 @@ const cartSlice = createSlice({
 
 export default cartSlice.reducer;
 
-export const { addItem, clearCart, removeItem, setUrl } = cartSlice.actions;
+export const {
+  addItem,
+  clearCart,
+  removeItem,
+  setUrl,
+  setLoggedinTrue,
+  setLoggedinFalse,
+} = cartSlice.actions;

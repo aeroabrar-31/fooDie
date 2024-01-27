@@ -4,8 +4,6 @@ import Shimmer from "./Shimmer";
 
 import { Divider, TextField } from "@mui/material";
 
-// import ;
-
 import { useEffect, useState } from "react";
 
 import { filterData } from "../utils/helper";
@@ -15,6 +13,7 @@ import useRestroUrl from "../utils/useRestroUrl";
 
 import { UseSelector, useSelector } from "react-redux";
 import Carouselcomp from "./Carouselcomp";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Body = () => {
   let [searchinp, setSearchinp] = useState("");
@@ -29,6 +28,12 @@ export const Body = () => {
   let [filterrestaurants, setFilterRestaurants] = useState([]);
 
   let [carouselData, setCarouselData] = useState([]);
+
+  const login = useSelector((state) => state.cart.login);
+  const navigate = useNavigate();
+  if (!localStorage.getItem("login")) {
+    navigate("/");
+  }
 
   async function getData() {
     console.log(restro_url);
@@ -94,6 +99,22 @@ export const Body = () => {
 
   console.log("render");
 
+  const handleSort = () => {
+    console.log(99);
+    filterrestaurants.sort((a, b) => {
+      return b?.info?.avgRating - a?.info?.avgRating;
+    });
+
+    console.log(102);
+    setFilterRestaurants(filterrestaurants);
+
+    // setAllRestaurants(filterrestaurants);
+    for (let index = 0; index < filterrestaurants.length; index++) {
+      const element = filterrestaurants[index];
+      console.log(element?.info?.avgRating);
+    }
+  };
+
   if (!allrestaurants)
     return (
       <div className="middle-not-found">
@@ -116,7 +137,7 @@ export const Body = () => {
         <div className="search-div">
           <input
             type="text"
-            placeholder="Restaurants, food"
+            placeholder="search restaurants.."
             value={searchinp}
             onChange={(e) => {
               // console.log(e.target.value);
@@ -133,8 +154,23 @@ export const Body = () => {
             variant="contained"
             sx={{ padding: "7px", borderRadius: "7px", textTransform: "none" }}
             color="secondary"
+            onClick={() => {
+              console.log(99);
+              filterrestaurants.sort((a, b) => {
+                return b?.info?.avgRating - a?.info?.avgRating;
+              });
+
+              console.log(102);
+              setFilterRestaurants(filterrestaurants);
+
+              // setAllRestaurants(filterrestaurants);
+              for (let index = 0; index < filterrestaurants.length; index++) {
+                const element = filterrestaurants[index];
+                console.log(element?.info?.avgRating);
+              }
+            }}
           >
-            Search
+            Top restaurants
           </Button>
         </div>
 

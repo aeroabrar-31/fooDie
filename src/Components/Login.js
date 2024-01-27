@@ -10,12 +10,13 @@ import {
 import Tooltip from "@mui/material/Tooltip";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setUrl } from "../utils/cartSlice";
+import { setLoggedinTrue, setUrl } from "../utils/cartSlice";
 
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import useRestroUrl from "../utils/useRestroUrl";
 import { Visibility } from "@mui/icons-material";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
   const [url, tttt] = useState("");
@@ -67,6 +68,7 @@ const Login = () => {
       values.email === "test@gmail.com" &&
       values.password === "password123"
     ) {
+      localStorage.setItem("login", true);
       navigate("/home");
     } else {
       alert("Invalid Credentials !!");
@@ -112,6 +114,7 @@ const Login = () => {
             <br />
             <br />
             <Field
+            
               as={TextField}
               label="Password"
               name="password"
@@ -126,6 +129,13 @@ const Login = () => {
             ></Field>
             <br />
             <br />
+            <ReCAPTCHA
+              style={{ textAlign: "center", marginLeft: "10%", width: "30%" }}
+              sitekey="6LeG2E0pAAAAAAcKXdARE9ukKau2VX3e-7CJy6Rk"
+              // onChange={onChange}
+            />
+            <br />
+            {/* <br /> */}
 
             <Button variant="contained" type="submit">
               Submit

@@ -69,7 +69,8 @@ export const Header = () => {
   const handleLogout = () => {
     navigate("/");
     setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedin");
+    handleClose();
+    localStorage.removeItem("login");
   };
 
   const handleClose = () => {
@@ -133,7 +134,7 @@ export const Header = () => {
           </Badge>
         </Link>
 
-        {
+        {localStorage.getItem("login") && (
           <IconButton onClick={handleMenu}>
             <Avatar
               src="https://assets.leetcode.com/users/avatars/avatar_1672670751.png"
@@ -143,7 +144,7 @@ export const Header = () => {
               aria-expanded={openMenu ? "true" : undefined}
             ></Avatar>
           </IconButton>
-        }
+        )}
 
         <Menu
           id="basic-menu"
