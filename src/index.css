@@ -81,7 +81,7 @@ body {
 .middle {
   min-height: 500px;
 }
-.middle img {
+.middle-not-found img {
   height: 800px;
   width: 100%;
 }

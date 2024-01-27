@@ -96,7 +96,7 @@ export const Body = () => {
 
   if (!allrestaurants)
     return (
-      <div className="middle">
+      <div className="middle-not-found">
         <img src="https://cdn.vox-cdn.com/thumbor/0wPKdVG9u6oz2WJT_oBcpAogZRQ=/0x0:1500x996/1200x800/filters:focal(630x378:870x618)/cdn.vox-cdn.com/uploads/chorus_image/image/66484072/ComingAttractions_Close_2.0.jpg" />
       </div>
     );
