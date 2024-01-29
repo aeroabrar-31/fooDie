@@ -14,6 +14,7 @@ import useRestroUrl from "../utils/useRestroUrl";
 import { UseSelector, useSelector } from "react-redux";
 import Carouselcomp from "./Carouselcomp";
 import { Navigate, useNavigate } from "react-router-dom";
+import Typewriter from "typewriter-effect";
 
 export const Body = () => {
   let [searchinp, setSearchinp] = useState("");
@@ -71,6 +72,22 @@ export const Body = () => {
 
   useEffect(() => {
     console.log("use Effect call back fxn");
+    const typewriter = new Typewriter("#yourInput", {
+      strings: [
+        "Kurnool !",
+        "Hyderabad !",
+        "Bengaluru !",
+        "Delhi !",
+        "Chennai !",
+        "Mumbai !",
+        "Kolkata !",
+        "Jaipur !",
+        "Lucknow !",
+      ],
+      autoStart: true,
+      loop: true,
+    });
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         console.log(position);
@@ -135,10 +152,12 @@ export const Body = () => {
           <span className="orange-text">{city}</span>
         </h2>
         <div className="search-div">
+          <h5 id="yourInput"></h5>
           <input
             type="text"
-            placeholder="search restaurants.."
+            // id="yourInput"
             value={searchinp}
+            placeholder="search restaurants, food.."
             onChange={(e) => {
               // console.log(e.target.value);
               setSearchinp(e.target.value);

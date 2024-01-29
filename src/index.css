@@ -159,11 +159,21 @@ body {
   height: 300px;
 }
 
-.form-container {
-  border: 2px solid black;
+.form-container-login {
+  /* border: 2px solid black; */
   padding: 10px;
   margin: auto;
-  width: 25%;
+  width: 50%;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.form-container-signup {
+  /* border: 2px solid black; */
+  padding: 10px;
+  margin: auto;
+  width: 85%;
   text-align: center;
   justify-content: center;
   margin-bottom: 10px;
@@ -392,7 +402,8 @@ ul {
 }
 
 .cart-item img {
-  height: fit-content;
+  /* height: fit-content; */
+  height: 160px;
   border-radius: 5px;
   width: 35%;
   float: right;
@@ -410,4 +421,11 @@ ul {
 
 .amount {
   color: rgba(237, 108, 2, 255);
+}
+
+.list-footer {
+  /* display: flex; */
+}
+.list-footer ul {
+  text-decoration: none;
 }

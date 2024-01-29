@@ -98,7 +98,7 @@ const MenuCard = (props) => {
           variant="filled"
           severity={isAdd ? "success" : "error"}
           sx={{ marginTop: 7 }}
-          onClose={() => {}}
+          onClose={handleClose}
         >
           {itemName}
         </Alert>
