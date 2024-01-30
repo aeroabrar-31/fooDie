@@ -129,12 +129,18 @@ const Login = () => {
   };
 
   const handleSubmit = (values) => {
+    setIsLoading(true);
+    console.log(values);
+
     if (
       values.email === "test@gmail.com" &&
       values.password === "password123"
     ) {
       localStorage.setItem("login", true);
-      navigate("/home");
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/home");
+      }, 3000);
     } else {
       alert("Invalid Credentials !!");
     }
@@ -239,13 +245,15 @@ const Login = () => {
                     <LoadingButton
                       loading={isLoading}
                       loadingPosition="start"
-                      startIcon={<SaveAsOutlined />}
-                      onClick={handleSignUpSubmit}
+                      startIcon={<LoginOutlined />}
                       variant="contained"
                       type="submit"
                     >
                       Submit
                     </LoadingButton>
+                    {/* <Button type="submit" variant="contained">
+                      Submit
+                    </Button> */}
                   </Form>
                 </Formik>
               </CardContent>
