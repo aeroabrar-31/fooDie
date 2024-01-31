@@ -363,6 +363,7 @@ ul {
   margin: auto;
   justify-content: center;
   text-align: center;
+  min-height: 600px;
 }
 .orange-text {
   color: rgba(237, 108, 2, 255);
@@ -428,4 +429,8 @@ ul {
 }
 .list-footer ul {
   text-decoration: none;
+}
+
+.cart-height-div {
+  min-height: 600px;
 }

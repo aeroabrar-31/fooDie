@@ -21,6 +21,7 @@ const MenuCard = (props) => {
 
   let menuItem = { ...props.props };
   menuItem.quantity = 0;
+  let [a, setA] = useState(0);
 
   let { name, imageId, price, defaultPrice, quantity } = { ...menuItem };
 
@@ -34,17 +35,20 @@ const MenuCard = (props) => {
   const [isAdd, setIsAdd] = useState(false);
 
   const handleAdd = (trans) => () => {
+    setA(a + 1);
     dispatch(addItem(menuItem));
     console.log("Added to cart");
     setOpenAdd("true");
     setItemName("Added to Cart !");
     setTransition(() => trans);
     setIsAdd(true);
-    // menuItem.quantity = menuItem.quantity + 1;
-    console.log(menuItem.quantity);
   };
 
   const handleClose = (event, reason) => {
+    console.log(reason);
+    if (reason === "clickway") {
+      return;
+    }
     setOpenAdd("false");
   };
 
@@ -77,7 +81,7 @@ const MenuCard = (props) => {
               </Button>
             </Tooltip>
             {/* <h4>{quantity}</h4> */}
-            <Button>{quantity}</Button>
+            <Button>{a}</Button>
             <Tooltip title="Add to cart" placement="right">
               <Button color="success" onClick={handleAdd(TransitionLeft)}>
                 <AddCircleOutlineIcon />

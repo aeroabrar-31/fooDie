@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import {
+  Alert,
   Button,
   Card,
   CardContent,
@@ -12,6 +13,7 @@ import {
   InputLabel,
   OutlinedInput,
   Paper,
+  Snackbar,
 } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -35,6 +37,13 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { LoadingButton } from "@mui/lab";
+import SignUp from "./SignUp";
+
+import Slide from "@mui/material/Slide";
+
+function TransitionLeft(props) {
+  return <Slide {...props} direction="left" />;
+}
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,6 +82,12 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [recaptcha, setRecaptcha] = useState(false);
+
+  function onChangeCaptcha(value) {
+    console.log(value);
+    setRecaptcha(true);
+  }
 
   const handleSignUpSubmit = () => {
     setIsLoading(true);
@@ -82,6 +97,30 @@ const Login = () => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const [snackOpen, setSnackOpen] = useState("close");
+  const [transition, setTransition] = useState(undefined);
+
+  function success(trans) {
+    console.log("====================================");
+    console.log("in the success func trans");
+    console.log("====================================");
+    setSnackOpen("open");
+    setTransition(() => trans);
+    console.log(new Date());
+
+    console.log(new Date());
+
+    return true;
+  }
+
+  const handleClose = (event, reason) => {
+    console.log(reason);
+    if (reason === "clickway") {
+      return;
+    }
+    setSnackOpen("close");
   };
 
   const [url, tttt] = useState("");
@@ -130,22 +169,30 @@ const Login = () => {
 
   const handleSubmit = (values) => {
     setIsLoading(true);
-    console.log(values);
+    // console.log(values);
 
     if (
       values.email === "test@gmail.com" &&
-      values.password === "password123"
+      values.password === "password123" &&
+      recaptcha
     ) {
       localStorage.setItem("login", true);
+      console.log("====================================");
+      console.log("success");
+      console.log("====================================");
+
       setTimeout(() => {
         setIsLoading(false);
-        navigate("/home");
+        if (success(TransitionLeft)) {
+          navigate("/home");
+        }
       }, 3000);
     } else {
       alert("Invalid Credentials !!");
+      setIsLoading(false);
     }
-    console.log("Form submitted");
-    console.log(values);
+    // console.log("Form submitted");
+    // console.log(values);
     localStorage.setItem("isLoggedin", true);
   };
 
@@ -237,7 +284,7 @@ const Login = () => {
                         width: "30%",
                       }}
                       sitekey="6LeG2E0pAAAAAAcKXdARE9ukKau2VX3e-7CJy6Rk"
-                      // onChange={onChange}
+                      onChange={onChangeCaptcha}
                     />
                     <br />
                     {/* <br /> */}
@@ -248,8 +295,9 @@ const Login = () => {
                       startIcon={<LoginOutlined />}
                       variant="contained"
                       type="submit"
+                      color="warning"
                     >
-                      Submit
+                      Login
                     </LoadingButton>
                     {/* <Button type="submit" variant="contained">
                       Submit
@@ -261,33 +309,27 @@ const Login = () => {
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <div className="form-container-signup">
-            <Card sx={{ boxShadow: 6 }}>
-              <CardContent>
-                <TextField label="Name" variant="outlined"></TextField>
-                <TextField label="Email" variant="outlined"></TextField>
-
-                <TextField label="Phone No" variant="outlined"></TextField>
-                <TextField label="Date Of Birth" variant="outlined"></TextField>
-                <TextField label="Password" variant="outlined"></TextField>
-                <TextField
-                  label="Confirm Password"
-                  variant="outlined"
-                ></TextField>
-                <LoadingButton
-                  loading={isLoading}
-                  loadingPosition="start"
-                  startIcon={<SaveAsOutlined />}
-                  onClick={handleSignUpSubmit}
-                  variant="contained"
-                >
-                  Submit
-                </LoadingButton>
-              </CardContent>
-            </Card>
-          </div>
+          <SignUp />
         </CustomTabPanel>
       </Box>
+
+      <Snackbar
+        open={snackOpen === "open"}
+        message="Success !"
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        TransitionComponent={transition}
+        autoHideDuration={2000}
+      >
+        <Alert
+          variant="filled"
+          severity={"success"}
+          sx={{ marginTop: 7 }}
+          onClose={handleClose}
+        >
+          Login Success !
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

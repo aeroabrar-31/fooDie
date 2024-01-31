@@ -54,7 +54,7 @@ export const Body = () => {
       setAllRestaurants(restros);
       setFilterRestaurants(restros);
       setCarouselData(crsData);
-    }, 4000);
+    }, 2000);
   }
 
   function getApi(bdcApi) {

@@ -120,19 +120,21 @@ export const Header = () => {
             Contact
           </Link>
         </Button>
-        <Link
-          to="/cart"
-          style={{
-            textDecoration: "none",
-            marginLeft: 10,
-            marginRight: 20,
-            color: "white",
-          }}
-        >
-          <Badge badgeContent={cartItems.length} color="success" showZero>
-            <ShoppingCartTwoTone fontSize="large" />
-          </Badge>
-        </Link>
+        {localStorage.getItem("login") && (
+          <Link
+            to="/cart"
+            style={{
+              textDecoration: "none",
+              marginLeft: 10,
+              marginRight: 20,
+              color: "white",
+            }}
+          >
+            <Badge badgeContent={cartItems.length} color="success" showZero>
+              <ShoppingCartTwoTone fontSize="large" />
+            </Badge>
+          </Link>
+        )}
 
         {localStorage.getItem("login") && (
           <IconButton onClick={handleMenu}>
