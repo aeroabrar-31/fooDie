@@ -26,6 +26,7 @@ import useRestroUrl from "../utils/useRestroUrl";
 import {
   LoginOutlined,
   PersonAddAltOutlined,
+  RestartAlt,
   SaveAsOutlined,
   Visibility,
   VisibilityOff,
@@ -183,12 +184,11 @@ const Login = () => {
 
       setTimeout(() => {
         setIsLoading(false);
-        if (success(TransitionLeft)) {
-          navigate("/home");
-        }
+
+        navigate("/home");
       }, 3000);
     } else {
-      alert("Invalid Credentials !!");
+      success(TransitionLeft);
       setIsLoading(false);
     }
     // console.log("Form submitted");
@@ -252,6 +252,7 @@ const Login = () => {
                       as={TextField}
                       label="Email"
                       name="email"
+                      sx={{ width: "290px" }}
                       placeholder="test@gmail.com"
                       helperText={<ErrorMessage name="email" />}
                       FormHelperTextProps={{
@@ -266,8 +267,27 @@ const Login = () => {
                       as={TextField}
                       label="Password"
                       name="password"
-                      type="password"
+                      type={!showPassword ? "password" : "text"}
+                      sx={{ width: "290px" }}
                       placeholder="password123"
+                      InputProps={{
+                        // <-- This is where the toggle button is added.
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {!showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                       helperText={<ErrorMessage name="password" />}
                       FormHelperTextProps={{
                         sx: {
@@ -280,8 +300,8 @@ const Login = () => {
                     <ReCAPTCHA
                       style={{
                         textAlign: "center",
-                        marginLeft: "5%",
-                        width: "30%",
+                        marginLeft: "50px",
+                        width: "20%",
                       }}
                       sitekey="6LeG2E0pAAAAAAcKXdARE9ukKau2VX3e-7CJy6Rk"
                       onChange={onChangeCaptcha}
@@ -295,13 +315,19 @@ const Login = () => {
                       startIcon={<LoginOutlined />}
                       variant="contained"
                       type="submit"
-                      color="warning"
+                      color="primary"
                     >
                       Login
                     </LoadingButton>
-                    {/* <Button type="submit" variant="contained">
-                      Submit
-                    </Button> */}
+                    <Button
+                      type="reset"
+                      startIcon={<RestartAlt />}
+                      sx={{ marginLeft: "8px" }}
+                      variant="contained"
+                      color="warning"
+                    >
+                      Reset
+                    </Button>
                   </Form>
                 </Formik>
               </CardContent>
@@ -323,11 +349,11 @@ const Login = () => {
       >
         <Alert
           variant="filled"
-          severity={"success"}
+          severity={"error"}
           sx={{ marginTop: 7 }}
           onClose={handleClose}
         >
-          Login Success !
+          Invalid credentials !
         </Alert>
       </Snackbar>
     </div>

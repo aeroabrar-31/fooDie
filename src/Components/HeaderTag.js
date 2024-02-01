@@ -98,28 +98,27 @@ export const Header = () => {
         >
           fooDie
         </Typography>
-
-        <Button color="inherit" sx={{ margin: 2 }}>
-          <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+        <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+          <Button color="inherit" sx={{ margin: 2 }}>
             Home
-          </Link>
-        </Button>
-        <Button color="inherit" sx={{ margin: 2 }}>
-          <Link to="/about" style={{ textDecoration: "none", color: "white" }}>
+          </Button>
+        </Link>
+        <Link to="/about" style={{ textDecoration: "none", color: "white" }}>
+          <Button color="inherit" sx={{ margin: 2 }}>
             About
-          </Link>
-        </Button>
-        <Button color="inherit" sx={{ margin: 2 }}>
-          <Link
-            to="/contact"
-            style={{
-              textDecoration: "none",
-              color: "white",
-            }}
-          >
+          </Button>
+        </Link>
+        <Link
+          to="/contact"
+          style={{
+            textDecoration: "none",
+            color: "white",
+          }}
+        >
+          <Button color="inherit" sx={{ margin: 2 }}>
             Contact
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         {localStorage.getItem("login") && (
           <Link
             to="/cart"

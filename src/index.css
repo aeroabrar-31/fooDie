@@ -163,7 +163,7 @@ body {
   /* border: 2px solid black; */
   padding: 10px;
   margin: auto;
-  width: 50%;
+  width: 60%;
   text-align: center;
   justify-content: center;
   margin-bottom: 10px;
@@ -226,13 +226,13 @@ body {
 }
 
 .contact-form {
-  border: 2px solid green;
+  /* border: 2px solid green; */
   width: 35%;
   margin: auto;
   text-align: center;
   justify-content: center;
-  margin-bottom: 2%;
-  margin-top: 2%;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
 .text-field {
   margin: 5px;

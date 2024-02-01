@@ -37,8 +37,29 @@ const SignUp = () => {
   const handleClickShowPasswordC = () => setShowPasswordC(!showPasswordC);
   const handleMouseDownPasswordC = () => setShowPasswordC(!showPasswordC);
 
+  const [signupdata, setSignUpdata] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirm: "",
+    country: "",
+    dob: "",
+    imgUrl: "",
+  });
+
+  const handleChange = (event) => {
+    let attr = event.target.name;
+    let value = event.target.value;
+
+    console.log(attr + ": " + value);
+    setSignUpdata((prev) => ({ ...prev, [attr]: value }));
+    console.log(signupdata);
+  };
+
   const handleSignUpSubmit = () => {
     setIsLoading(true);
+    console.log(signupdata);
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -49,33 +70,59 @@ const SignUp = () => {
         <CardContent>
           <TextField
             label="Name"
-            sx={{ margin: "10px" }}
+            name="name"
+            required
+            sx={{ margin: "10px", width: "250px" }}
             variant="outlined"
+            onChange={handleChange}
           ></TextField>
           <TextField
             label="Email"
-            sx={{ margin: "10px" }}
+            name="email"
+            helperText=""
+            // error={true}
+            required
+            sx={{ margin: "10px", width: "250px" }}
             variant="outlined"
+            onChange={handleChange}
           ></TextField>
 
           <TextField
             label="Phone No"
-            sx={{ margin: "10px" }}
+            sx={{ margin: "10px", width: "250px" }}
             variant="outlined"
+            name="phone"
+            required
             type="number"
+            onChange={handleChange}
           ></TextField>
           <TextField
             label="Date Of Birth"
-            sx={{ margin: "10px", width: "43%" }}
+            sx={{ margin: "10px", width: "250px" }}
             variant="outlined"
+            required
             defaultValue={materialDateInput}
             type="date"
+            name="dob"
+            onChange={handleChange}
+          ></TextField>
+
+          <TextField
+            label="Profile image Url"
+            sx={{ margin: "10px", width: "90%" }}
+            variant="outlined"
+            required
+            name="imgUrl"
+            onChange={handleChange}
           ></TextField>
 
           <TextField
             label="Password"
-            sx={{ margin: "10px", width: "43%" }}
+            sx={{ margin: "10px", width: "250px" }}
             variant="outlined"
+            name="password"
+            required
+            onChange={handleChange}
             type={showPassword ? "password" : "text"}
             InputProps={{
               // <-- This is where the toggle button is added.
@@ -91,11 +138,14 @@ const SignUp = () => {
                 </InputAdornment>
               ),
             }}
-          ></TextField>
+          />
           <TextField
             label="Confirm Password"
-            sx={{ margin: "10px", width: "43%" }}
+            name="confirm"
+            required
+            sx={{ margin: "10px", width: "250px" }}
             variant="outlined"
+            onChange={handleChange}
             type={showPasswordC ? "password" : "text"}
             InputProps={{
               // <-- This is where the toggle button is added.
@@ -114,9 +164,14 @@ const SignUp = () => {
           ></TextField>
           <Autocomplete
             id="country-select-demo"
-            sx={{ width: "80%", margin: "10px 10%" }}
             options={countries}
             autoHighlight
+            onChange={(event, newValue) => {
+              // Access and update the whole value here
+              console.log("Selected option:", newValue);
+              setSignUpdata((prev) => ({ ...prev, country: newValue.label }));
+              console.log(signupdata);
+            }}
             getOptionLabel={(option) => option.label}
             renderOption={(props, option) => (
               <Box
@@ -136,8 +191,13 @@ const SignUp = () => {
             )}
             renderInput={(params) => (
               <TextField
+                sx={{ width: "90%", margin: "10px 0px" }}
                 {...params}
                 label="Country"
+                name="country"
+                required
+                // onChangeCapture={handleChange}
+                // onChange={handleChange}
                 inputProps={{
                   ...params.inputProps,
                   autoComplete: "new-password", // disable autocomplete and autofill

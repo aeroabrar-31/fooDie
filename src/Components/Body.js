@@ -146,6 +146,7 @@ export const Body = () => {
       <h2>So, what you want to eat today?</h2>
       <Carouselcomp props={carouselData} />
       <div className="middle">
+        <br />
         <Divider></Divider>
         <h2>
           Restaurants with online food delivery in{" "}

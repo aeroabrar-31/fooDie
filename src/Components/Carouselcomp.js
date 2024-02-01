@@ -38,6 +38,7 @@ const Carouselcomp = (props) => {
         autoPlay={true}
         infinite={true}
         autoPlaySpeed={2000}
+        showDots={true}
       >
         {arr.map((obj) => {
           return (
