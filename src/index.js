@@ -16,6 +16,8 @@ import Login from "./Components/Login";
 
 // import Login
 
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
 import MenuCategory from "./Components/MenuCategory";
 import Profile from "./Components/Profile";
 import Shimmer from "./Components/Shimmer";
@@ -63,6 +65,7 @@ const AppLayout = () => {
       <Outlet />
       <GoToTop />
       <Footer />
+      <SpeedInsights />
     </Provider>
   );
 };
