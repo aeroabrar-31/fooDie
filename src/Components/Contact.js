@@ -16,7 +16,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { SendRounded } from "@mui/icons-material";
+import { RestartAlt, SendRounded } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 
 import Slide from "@mui/material/Slide";
@@ -108,7 +108,7 @@ const Contact = () => {
               required
               sx={{
                 margin: "10px",
-                width: "60%",
+                width: "75%",
               }}
             ></TextField>{" "}
             <br></br>
@@ -121,7 +121,7 @@ const Contact = () => {
               required
               sx={{
                 margin: "10px",
-                width: "60%",
+                width: "75%",
               }}
             ></TextField>
             <br></br>
@@ -133,7 +133,7 @@ const Contact = () => {
               required
               sx={{
                 margin: "10px",
-                width: "60%",
+                width: "75%",
               }}
             ></TextField>
             <br></br>
@@ -147,9 +147,10 @@ const Contact = () => {
               rows={5}
               sx={{
                 margin: "10px",
-                width: "60%",
+                width: "75%",
               }}
             ></TextField>
+            <br></br>
             <br></br>
             <LoadingButton
               loading={loading}
@@ -160,6 +161,15 @@ const Contact = () => {
             >
               Send
             </LoadingButton>
+            <Button
+              color="warning"
+              variant="contained"
+              startIcon={<RestartAlt />}
+              type="reset"
+              sx={{ marginLeft: "10px" }}
+            >
+              Reset
+            </Button>
             <br></br>
           </form>
 

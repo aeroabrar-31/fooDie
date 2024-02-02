@@ -1,8 +1,14 @@
-import { PersonAdd, Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  PersonAdd,
+  RestartAlt,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import {
   Autocomplete,
   Box,
+  Button,
   Card,
   CardContent,
   IconButton,
@@ -68,153 +74,168 @@ const SignUp = () => {
     <div className="form-container-signup">
       <Card sx={{ boxShadow: 6 }}>
         <CardContent>
-          <TextField
-            label="Name"
-            name="name"
-            required
-            sx={{ margin: "10px", width: "250px" }}
-            variant="outlined"
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            label="Email"
-            name="email"
-            helperText=""
-            // error={true}
-            required
-            sx={{ margin: "10px", width: "250px" }}
-            variant="outlined"
-            onChange={handleChange}
-          ></TextField>
+          <form onSubmit={handleSignUpSubmit}>
+            <TextField
+              label="Name"
+              name="name"
+              required
+              sx={{ margin: "10px", width: "250px" }}
+              variant="outlined"
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              label="Email"
+              name="email"
+              helperText=""
+              // error={true}
+              required
+              sx={{ margin: "10px", width: "250px" }}
+              variant="outlined"
+              onChange={handleChange}
+            ></TextField>
 
-          <TextField
-            label="Phone No"
-            sx={{ margin: "10px", width: "250px" }}
-            variant="outlined"
-            name="phone"
-            required
-            type="number"
-            onChange={handleChange}
-          ></TextField>
-          <TextField
-            label="Date Of Birth"
-            sx={{ margin: "10px", width: "250px" }}
-            variant="outlined"
-            required
-            defaultValue={materialDateInput}
-            type="date"
-            name="dob"
-            onChange={handleChange}
-          ></TextField>
+            <TextField
+              label="Phone No"
+              sx={{ margin: "10px", width: "250px" }}
+              variant="outlined"
+              name="phone"
+              required
+              type="number"
+              onChange={handleChange}
+            ></TextField>
+            <TextField
+              label="Date Of Birth"
+              sx={{ margin: "10px", width: "250px" }}
+              variant="outlined"
+              required
+              defaultValue={materialDateInput}
+              type="date"
+              name="dob"
+              onChange={handleChange}
+            ></TextField>
 
-          <TextField
-            label="Profile image Url"
-            sx={{ margin: "10px", width: "90%" }}
-            variant="outlined"
-            required
-            name="imgUrl"
-            onChange={handleChange}
-          ></TextField>
+            <TextField
+              label="Profile image Url"
+              sx={{ margin: "10px", width: "90%" }}
+              variant="outlined"
+              required
+              name="imgUrl"
+              onChange={handleChange}
+            ></TextField>
 
-          <TextField
-            label="Password"
-            sx={{ margin: "10px", width: "250px" }}
-            variant="outlined"
-            name="password"
-            required
-            onChange={handleChange}
-            type={showPassword ? "password" : "text"}
-            InputProps={{
-              // <-- This is where the toggle button is added.
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            label="Confirm Password"
-            name="confirm"
-            required
-            sx={{ margin: "10px", width: "250px" }}
-            variant="outlined"
-            onChange={handleChange}
-            type={showPasswordC ? "password" : "text"}
-            InputProps={{
-              // <-- This is where the toggle button is added.
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPasswordC}
-                    onMouseDown={handleMouseDownPasswordC}
-                  >
-                    {showPasswordC ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          ></TextField>
-          <Autocomplete
-            id="country-select-demo"
-            options={countries}
-            autoHighlight
-            onChange={(event, newValue) => {
-              // Access and update the whole value here
-              console.log("Selected option:", newValue);
-              setSignUpdata((prev) => ({ ...prev, country: newValue.label }));
-              console.log(signupdata);
-            }}
-            getOptionLabel={(option) => option.label}
-            renderOption={(props, option) => (
-              <Box
-                component="li"
-                sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                {...props}
-              >
-                <img
-                  loading="lazy"
-                  width="20"
-                  srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                  src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                  alt=""
+            <TextField
+              label="Password"
+              sx={{ margin: "10px", width: "250px" }}
+              variant="outlined"
+              name="password"
+              required
+              onChange={handleChange}
+              type={showPassword ? "password" : "text"}
+              InputProps={{
+                // <-- This is where the toggle button is added.
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              label="Confirm Password"
+              name="confirm"
+              required
+              sx={{ margin: "10px", width: "250px" }}
+              variant="outlined"
+              onChange={handleChange}
+              type={showPasswordC ? "password" : "text"}
+              InputProps={{
+                // <-- This is where the toggle button is added.
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPasswordC}
+                      onMouseDown={handleMouseDownPasswordC}
+                    >
+                      {showPasswordC ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            ></TextField>
+            <Autocomplete
+              id="country-select-demo"
+              options={countries}
+              autoHighlight
+              onChange={(event, newValue) => {
+                // Access and update the whole value here
+                console.log("Selected option:", newValue);
+                setSignUpdata((prev) => ({
+                  ...prev,
+                  country: newValue?.label,
+                }));
+                console.log(signupdata);
+              }}
+              getOptionLabel={(option) => option?.label}
+              renderOption={(props, option) => (
+                <Box
+                  component="li"
+                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                  {...props}
+                >
+                  <img
+                    loading="lazy"
+                    width="20"
+                    srcSet={`https://flagcdn.com/w40/${option?.code.toLowerCase()}.png 2x`}
+                    src={`https://flagcdn.com/w20/${option?.code.toLowerCase()}.png`}
+                    alt=""
+                  />
+                  {option?.label} ({option?.code}) +{option?.phone}
+                </Box>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  sx={{ width: "90%", margin: "10px 0px" }}
+                  {...params}
+                  label="Country"
+                  name="country"
+                  required
+                  // onChangeCapture={handleChange}
+                  // onChange={handleChange}
+                  inputProps={{
+                    ...params.inputProps,
+                    autoComplete: "new-password", // disable autocomplete and autofill
+                  }}
                 />
-                {option.label} ({option.code}) +{option.phone}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                sx={{ width: "90%", margin: "10px 0px" }}
-                {...params}
-                label="Country"
-                name="country"
-                required
-                // onChangeCapture={handleChange}
-                // onChange={handleChange}
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: "new-password", // disable autocomplete and autofill
-                }}
-              />
-            )}
-          />
-          <LoadingButton
-            loading={isLoading}
-            loadingPosition="start"
-            startIcon={<PersonAdd />}
-            onClick={handleSignUpSubmit}
-            variant="contained"
-            color="warning"
-          >
-            Signup
-          </LoadingButton>
+              )}
+            />
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              startIcon={<PersonAdd />}
+              type="submit"
+              onClick={handleSignUpSubmit}
+              variant="contained"
+              color="primary"
+            >
+              Signup
+            </LoadingButton>
+            <Button
+              sx={{ marginLeft: "10px" }}
+              startIcon={<RestartAlt />}
+              type="reset"
+              color="warning"
+              variant="contained"
+            >
+              Reset
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>
