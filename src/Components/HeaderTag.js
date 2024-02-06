@@ -11,7 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import { Badge } from "@mui/material";
+import { Badge, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
@@ -67,6 +67,7 @@ export const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleLogout = () => {
+    setDialogOpen(false);
     navigate("/");
     setIsLoggedIn(false);
     handleClose();
@@ -87,88 +88,129 @@ export const Header = () => {
     setOpenMenu(false);
   };
 
+  const handleProfile = () => {
+    navigate("/profile");
+    handleClose();
+  };
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setDialogOpen(false);
+    handleClose();
+  };
+
   return (
-    <AppBar position="sticky" color="warning">
-      <Toolbar>
-        <Typography
-          variant="h4"
-          component="div"
-          letterSpacing={3}
-          sx={{ flexGrow: 1 }}
-        >
-          fooDie
-        </Typography>
-        <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
-          <Button color="inherit" sx={{ margin: 2 }}>
-            Home
-          </Button>
-        </Link>
-        <Link to="/about" style={{ textDecoration: "none", color: "white" }}>
-          <Button color="inherit" sx={{ margin: 2 }}>
-            About
-          </Button>
-        </Link>
-        <Link
-          to="/contact"
-          style={{
-            textDecoration: "none",
-            color: "white",
-          }}
-        >
-          <Button color="inherit" sx={{ margin: 2 }}>
-            Contact
-          </Button>
-        </Link>
-        {localStorage.getItem("login") && (
+    <div>
+      <AppBar position="sticky" color="warning">
+        <Toolbar>
+          <Typography
+            variant="h4"
+            component="div"
+            letterSpacing={3}
+            sx={{ flexGrow: 1 }}
+          >
+            fooDie
+          </Typography>
+          <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+            <Button color="inherit" sx={{ margin: 2 }}>
+              Home
+            </Button>
+          </Link>
+          <Link to="/about" style={{ textDecoration: "none", color: "white" }}>
+            <Button color="inherit" sx={{ margin: 2 }}>
+              About
+            </Button>
+          </Link>
           <Link
-            to="/cart"
+            to="/contact"
             style={{
               textDecoration: "none",
-              marginLeft: 10,
-              marginRight: 20,
               color: "white",
             }}
           >
-            <Badge badgeContent={cartItems.length} color="success" showZero>
-              <ShoppingCartTwoTone fontSize="large" />
-            </Badge>
+            <Button color="inherit" sx={{ margin: 2 }}>
+              Contact
+            </Button>
           </Link>
-        )}
+          {localStorage.getItem("login") && (
+            <Link
+              to="/cart"
+              style={{
+                textDecoration: "none",
+                marginLeft: 10,
+                marginRight: 20,
+                color: "white",
+              }}
+            >
+              <Badge badgeContent={cartItems.length} color="success" showZero>
+                <ShoppingCartTwoTone fontSize="large" />
+              </Badge>
+            </Link>
+          )}
 
-        {localStorage.getItem("login") && (
-          <IconButton onClick={handleMenu}>
-            <Avatar
-              src="https://assets.leetcode.com/users/avatars/avatar_1672670751.png"
-              sx={{ width: 40, height: 40, margin: 1 }}
-              aria-controls={openMenu ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={openMenu ? "true" : undefined}
-            ></Avatar>
-          </IconButton>
-        )}
+          {localStorage.getItem("login") && (
+            <IconButton onClick={handleMenu}>
+              <Avatar
+                src="https://assets.leetcode.com/users/avatars/avatar_1672670751.png"
+                sx={{ width: 40, height: 40, margin: 1 }}
+                aria-controls={openMenu ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={openMenu ? "true" : undefined}
+              ></Avatar>
+            </IconButton>
+          )}
 
-        <Menu
-          id="basic-menu"
-          open={openMenu}
-          // onClose={handleCloseMenu}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-        >
-          <MenuItem onClick={handleClose}>
-            <AccountCircleOutlined sx={{ marginRight: 1 }} />
-            Profile
-          </MenuItem>
-          <MenuItem onClick={handleLogout}>
-            <LogoutOutlined sx={{ marginRight: 1 }} />
-            Logout
-          </MenuItem>
-        </Menu>
-      </Toolbar>
-    </AppBar>
+          <Menu
+            id="basic-menu"
+            open={openMenu}
+            // onClose={handleCloseMenu}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+          >
+            <MenuItem onClick={handleProfile}>
+              <AccountCircleOutlined sx={{ marginRight: 1 }} />
+              Profile
+            </MenuItem>
+            <MenuItem onClick={openDialog}>
+              <LogoutOutlined sx={{ marginRight: 1 }} />
+              Logout
+            </MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+      <div>
+        <Dialog open={dialogOpen}>
+          <DialogTitle>Do you really want to Logout ?</DialogTitle>
+          <DialogActions>
+            <Button
+              sx={{ textTransform: "none" }}
+              color="primary"
+              variant="contained"
+              onClick={closeDialog}
+            >
+              Cancel
+            </Button>
+            <Button
+              sx={{ textTransform: "none" }}
+              variant="contained"
+              color="error"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </div>
 
     // <div className="header">
     //   <Title />

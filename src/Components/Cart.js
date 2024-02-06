@@ -7,6 +7,9 @@ import {
   Paper,
   TextField,
   Grid,
+  Dialog,
+  DialogTitle,
+  DialogActions,
 } from "@mui/material";
 import { clearCart } from "../utils/cartSlice";
 import { useEffect, useState } from "react";
@@ -28,6 +31,17 @@ const Cart = () => {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+    setDialogOpen(false);
+  };
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setDialogOpen(false);
   };
 
   if (cartItems.length == 0)
@@ -54,7 +68,7 @@ const Cart = () => {
                 variant="contained"
                 color="warning"
                 sx={{ textTransform: "none", padding: "7px", margin: "5px" }}
-                onClick={handleClearCart}
+                onClick={openDialog}
               >
                 <HighlightOff fontSize="small" sx={{ marginRight: "2px" }} />
                 clear cart
@@ -123,6 +137,30 @@ const Cart = () => {
           </Paper>
         </Grid>
       </Grid>
+
+      <div>
+        <Dialog open={dialogOpen}>
+          <DialogTitle>Do you want to clear cart?</DialogTitle>
+          <DialogActions>
+            <Button
+              sx={{ textTransform: "none" }}
+              color="primary"
+              variant="contained"
+              onClick={closeDialog}
+            >
+              No
+            </Button>
+            <Button
+              sx={{ textTransform: "none" }}
+              variant="contained"
+              color="error"
+              onClick={handleClearCart}
+            >
+              Yes, Clear
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 };
